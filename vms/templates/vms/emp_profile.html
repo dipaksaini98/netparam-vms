@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Employee Profile{% endblock title %}
+{% block content %}
+
+{%  include 'vms/navbar.html' %}
+{%  include 'vms/status.html' %}
+
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			
+			<table class="table table-sm">
+				<tr>
+					<th>Visitor</th>
+					<th>Category</th>
+					<th>Date Visited</th>
+					<th>Status</th>
+					
+				</tr>
+                {% for visit in visits %}
+                <tr>
+                    <td>{{ visit.visitor }}</td>
+                    <td>{{ visit.visitor.category }}</td>
+                    <td>{{ visit.date_visited }}</td>
+                    <td>{{ visit.status }}</td>
+                    
+                </tr>
+                {% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

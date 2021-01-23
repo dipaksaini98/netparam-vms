@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Delete Visit{% endblock title %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+
+            <p>Are you sure you want to delete this visitor?</p>
+            <form action="{% url 'vms:delete_visitor' visitor.id %}" method="post">
+                {% csrf_token %}
+                <a class="btn btn-info" href="{% url 'vms:visitor' %}">Cancel</a>
+                <input class="btn btn-danger" type="submit" value="Confirm", name="Confirm">
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

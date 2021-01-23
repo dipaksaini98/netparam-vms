@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Register{% endblock title %}
+{% block style %}
+  
+<style>
+body {
+    background-image: url("{% static 'assets/2853457.svg'%}");
+    padding: 0px;
+    position: static;
+    background-repeat:no-repeat;
+    background-position: right;
+  } 
+  .card {
+  width: auto;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  /* margin-left: 20px; */
+  background: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  overflow: auto;
+}
+</style>
+{% endblock style%}
+
+{% block content %}
+
+<div class="row d-flex justify-content-left h-100">
+    <div class="col-sm-6">
+      <div class="card" >
+        <div class="card-body">
+            <div class="d-flex justify-content-center">
+                <h5 class="card-title text-center">Sign up</h5>                  
+            </div> 
+            <hr>
+            <div class="d-flex justify-content-center form_container">        
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="mb-2 input-group-append justify-content-left">
+                                    {{form.username|as_crispy_field}}
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="mb-2 input-group-append justify-content-left">
+                                    {{form.name|as_crispy_field}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="mb-2 input-group-append justify-content-left">
+                                    {{form.email|as_crispy_field}}
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="mb-2 input-group-append justify-content-left">
+                                    {{form.contact|as_crispy_field}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="mb-2 input-group-append justify-content-left">
+                                    {{form.password1|as_crispy_field}}
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="mb-2 input-group-append justify-content-left">
+                                    {{form.password2|as_crispy_field}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="mb-2 input-group-append justify-content-left">
+                                    {{form.address|as_crispy_field}}
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="mb-2 input-group-append justify-content-left">
+                                    {{form.designation|as_crispy_field}}
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                    {{form.errors}}
+                    <div class="d-flex justify-content-left mt-3 login_container">
+                        <input type="submit", value="Submit", class="btn btn-info mr-3">
+                        <input type="reset" value="Clear" class="btn btn-warning">
+                    </div>
+                    
+                </form>
+            </div>
+            
+        </div>
+
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                    Already have an account? <a href="{% url 'vms:login'%}" class="ml-2">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+
+
+<script>
+  
+    document.getElementById("id_username").addEventListener("change", usernameFunction);
+    document.getElementById("id_email").addEventListener("change",emailFunction);
+    function usernameFunction() {
+      var x = document.getElementById("id_username");
+      var name = x.value;
+      $.ajax({
+          url: 'check_username_exist',
+          type:'POST',
+          data:{
+            username:name
+          },
+            success: function (data) {
+                if (data.is_taken==true) {
+                  $(".name_error").remove();
+                  $("<span class='name_error alert alert-warning' style='padding: 0px;color: red; '> Username isn't Available.</span>").insertAfter("#id_username");
+                  // alert('Name already exist!!');
+                }
+                else{
+                  $(".name_error").remove();
+                  $("<span class='name_error d-flex justify-content-center' style='padding: 0px;color: green;'>Username is Available</span>").insertAfter("#id_username");
+                }
+            }
+        });
+    }
+    function emailFunction(){
+        var y = document.getElementById("id_email");
+        var email = y.value;
+        $.ajax({
+            url:'check_email_exist',
+            type:'POST',
+            data:{
+                email:email
+            },
+            success: function(data){
+                if(data.is_taken==true){
+                    $(".email_error").remove();
+                    $("<span class='email_error d-flex justify-content-center' style='padding: 0px;color: red; '> Email Already Registered.</span>").insertAfter("#id_email"); 
+                }
+                else{
+                    $(".email_error").remove();
+                    $("<span class='email_error d-flex justify-content-center' style='padding: 0px;color: green;'>Email is Available</span>").insertAfter("#id_email");
+                }
+            }
+        });
+    }
+    </script>
+
+{% endblock javascript %}  

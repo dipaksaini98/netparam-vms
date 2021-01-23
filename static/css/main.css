@@ -1,0 +1,25 @@
+/* #logo{
+} */
+
+body {
+  background-color: #fff;
+  padding: 0px;
+}
+#total-visits {
+  background-color: #0a6fb3;
+}
+
+#visits-done {
+  background-color: #0c91eb;
+}
+
+#visits-pending {
+  background-color: #5baedf;
+}
+
+html {
+  overflow: visible;
+  margin: auto;
+  padding: 0;
+  background: #fff !important;
+}

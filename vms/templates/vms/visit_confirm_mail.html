@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load qr_code %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+
+   <h1 class="text-center">Thanks</h1> 
+   
+   <p>{{ name }}, Your visit has been scheduled succeessfully.</p>
+   
+    <!-- {{ form.as_p }} -->
+    {% for field in form %} 
+
+    <div class="fieldWrapper"> 
+
+        
+
+        {{ field.label_tag }} {{ field.value }} 
+
+       
+    </div> 
+
+{% endfor %}  
+<p>Your OTP for varification is {{ otp }}</p>
+
+{% endblock %}

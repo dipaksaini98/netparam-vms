@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Settings{% endblock title %}
+{% block content %}
+
+<br>
+
+<div class="row">
+   <div class="col-md-3">
+      <div class="card card-body">
+         <a href="{% url 'vms:emp-profile-page' %}" class="btn btn-warning"> &#8592; Back</a>
+         <hr>
+         <h3 style="text-align: center;">Update Profile - {{ employee.name }} </h3>
+         <hr>
+         
+
+      </div>
+   </div>
+   <div class="col-md-6">
+      <div class="card card-body">
+         <form action="" method="post" >
+            {% csrf_token %}
+            
+            <div class="input-group mb-3">
+               <div class="input-group-append">
+                   <span class="input-group-text"><i class="fas fa-user"></i></span>
+               </div>
+               {{form.username}}
+            </div>
+            <div class="input-group mb-3">
+               <div class="input-group-append">
+                   <span class="input-group-text"><i class="fas fa-user"></i></span>
+               </div>
+               {{form.name}}
+            </div>
+            <div class="input-group mb-3">
+               <div class="input-group-append">
+                   <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+               </div>
+               {{form.email}}
+            </div>
+            <div class="input-group mb-3">
+               <div class="input-group-append">
+                   <span class="input-group-text"><i class="fas fa-phone"></i></span>
+               </div>
+               {{form.contact}}
+            </div>
+            <div class="input-group mb-3">
+               <div class="input-group-append">
+                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+               </div>
+               {{form.address}}
+            </div>
+            <div class="input-group mb-3">
+               <div class="input-group-append">
+                   <span class="input-group-text"><i class="fas fa-star"></i></span>
+               </div>
+               {{form.designation}}
+            </div>
+
+           {{ form.errors }}
+
+            <input class="btn btn-primary" type="submit" value="Submit" name="Update Information">
+         </form>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

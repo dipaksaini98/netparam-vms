@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Employee's Details{% endblock title %}
+{% block content %}
+{%  include 'vms/navbar.html' %}
+
+		<br>
+
+		<div class="row">
+			<div class="col-md">
+                <div class="row justify-content-end mr-3">
+                    <a class="btn btn-info" href="{% url 'vms:add_employee' %}">New Employee</a>
+                </div>
+                <hr>
+				<h5>Employees</h5>
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+                            <th>Username</th>
+							<th>Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                            <th>Designation</th>
+                            <th>Action</th>
+						</tr>
+                        {% for employee in employees %}
+                        <tr>
+                            <td>{{employee.username}}</td>
+                            <td>{{employee.name}}</td>
+                            <td>{{employee.email}}</td>
+                            <td>{{employee.contact}}</td>
+                            <td>{{employee.address}}</td>
+                            <td>{{employee.designation}}</td>
+                            <td>
+                                <a class="btn btn-sm btn-info" href="{% url 'vms:employee' employee.id %}">View</a>
+                                <a class="btn btn-sm btn-warning" href="{% url 'vms:update_employee' employee.id %}">Update</a>
+                                <a class="btn btn-sm btn-danger" href="{% url 'vms:delete_employee' employee.id %}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+					</table>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}
