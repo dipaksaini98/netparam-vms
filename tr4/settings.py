@@ -142,10 +142,10 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = ('../static',)
 
 MEDIA_URL = "/images/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
+MEDIA_ROOT = ("../static/images",)
 
 DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
