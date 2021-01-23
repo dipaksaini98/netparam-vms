@@ -182,3 +182,4 @@ DJOSER = {
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
 }
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
